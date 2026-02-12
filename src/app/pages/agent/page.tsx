@@ -167,7 +167,6 @@ export default function Agent() {
     return (
         <div className="flex h-dvh bg-slate-50 overflow-hidden font-sans text-slate-900 relative">
             {/* chat sect */}
-            {/* Mobile Overlay */}
             <AnimatePresence>
                 {isMobile && sidebarOpen && (
                     <motion.div
