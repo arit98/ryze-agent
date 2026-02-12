@@ -41,14 +41,14 @@ export default function OurStoryPage() {
                 </UILibrary.Button>
             </nav>
 
-            <div className="max-w-6xl mx-auto px-8 py-24">
+            <div className="max-w-6xl mx-auto px-4 md:px-8 py-12 md:py-24">
                 {/* hero sect */}
-                <header className="text-center mb-32 animate-soft-in">
+                <header className="text-center mb-20 md:mb-32 animate-soft-in">
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50 text-indigo-600 text-[10px] font-black uppercase tracking-widest border border-indigo-100 mb-8">
                         <Heart className="w-3 h-3 fill-indigo-600" />
                         <span>Our Origin Story</span>
                     </div>
-                    <h1 className="text-6xl md:text-8xl font-black tracking-tight text-slate-900 mb-8 leading-[0.95]">
+                    <h1 className="text-4xl md:text-6xl lg:text-8xl font-black tracking-tight text-slate-900 mb-8 leading-[0.95]">
                         Crafting the <span className="gradient-text">Future</span> of Creation.
                     </h1>
                     <p className="text-xl md:text-2xl text-slate-500 max-w-3xl mx-auto leading-relaxed font-medium">
@@ -56,9 +56,9 @@ export default function OurStoryPage() {
                     </p>
                 </header>
 
-                <div className="space-y-32">
+                <div className="space-y-20 md:space-y-32">
                     {/* sect 1 */}
-                    <section className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center animate-soft-in">
+                    <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center animate-soft-in">
                         <div className="space-y-8">
                             <div className="w-16 h-16 bg-rose-50 rounded-2xl flex items-center justify-center text-rose-600 shadow-xl shadow-rose-100">
                                 <Lightbulb className="w-8 h-8" />
@@ -79,7 +79,7 @@ export default function OurStoryPage() {
                     </section>
 
                     {/* sect 2 */}
-                    <section className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center animate-soft-in">
+                    <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center animate-soft-in">
                         <div className="order-2 lg:order-1 relative group">
                             <div className="absolute -inset-4 bg-linear-to-bl from-purple-500 to-cyan-500 rounded-[3rem] opacity-20 blur-2xl group-hover:opacity-30 transition-opacity" />
                             <UILibrary.Card className="aspect-square flex items-center justify-center bg-white/80 border-none relative overflow-hidden">
@@ -105,7 +105,7 @@ export default function OurStoryPage() {
                             <div className="flex justify-center">
                                 <Sparkles className="w-12 h-12 text-indigo-600 opacity-20" />
                             </div>
-                            <blockquote className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+                            <blockquote className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight">
                                 "To empower every individual through <span className="text-indigo-600">seamless design</span> and purposeful <span className="gradient-text">intelligence</span>."
                             </blockquote>
                             <div className="flex items-center justify-center gap-4 pt-4">
@@ -141,7 +141,7 @@ export default function OurStoryPage() {
 
                     {/* sect 6 */}
                     <section className="animate-soft-in">
-                        <UILibrary.Card className="bg-indigo-950 p-12 md:p-24 text-white border-none shadow-3xl rounded-[4rem] relative overflow-hidden">
+                        <UILibrary.Card className="bg-indigo-950 p-8 md:p-24 text-white border-none shadow-3xl rounded-[3rem] md:rounded-[4rem] relative overflow-hidden">
                             <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500/20 rounded-full blur-[100px] -mr-48 -mt-48" />
                             <div className="absolute bottom-0 left-0 w-96 h-96 bg-rose-500/10 rounded-full blur-[100px] -ml-48 -mb-48" />
 
@@ -157,7 +157,7 @@ export default function OurStoryPage() {
                                 <div className="pt-8">
                                     <UILibrary.Button
                                         variant="primary"
-                                        className="bg-white text-indigo-950 hover:bg-indigo-50 px-10 py-6 rounded-2xl text-lg font-bold shadow-none cursor-pointer"
+                                        className="bg-white text-indigo-950 hover:bg-indigo-50 px-10 py-6 rounded-2xl text-lg font-bold shadow-none cursor-pointer w-full md:w-auto justify-center"
                                         onClick={() => router.push('/pages/agent')}
                                     >
                                         Start Creating with Us
@@ -173,7 +173,7 @@ export default function OurStoryPage() {
                         © {new Date().getFullYear()} Lumina Intelligence Inc.
                     </p>
                 </footer>
-            </div>
-        </main>
+            </div >
+        </main >
     );
 }

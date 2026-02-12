@@ -58,6 +58,22 @@ export default function Agent() {
 
     const router = useRouter()
 
+    // mob check
+    const [isMobile, setIsMobile] = useState(false);
+    useEffect(() => {
+        const checkMobile = () => {
+            const mobile = window.innerWidth < 768;
+            setIsMobile(mobile);
+        };
+
+        // init mob check
+        checkMobile();
+        if (window.innerWidth < 768) setSidebarOpen(false);
+
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
     useEffect(() => {
         setMounted(true);
     }, []);
@@ -149,15 +165,36 @@ export default function Agent() {
     };
 
     return (
-        <div className="flex h-screen bg-slate-50 overflow-hidden font-sans text-slate-900">
+        <div className="flex h-dvh bg-slate-50 overflow-hidden font-sans text-slate-900 relative">
             {/* chat sect */}
+            {/* Mobile Overlay */}
+            <AnimatePresence>
+                {isMobile && sidebarOpen && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setSidebarOpen(false)}
+                        className="fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-30"
+                    />
+                )}
+            </AnimatePresence>
+
             <motion.div
                 initial={false}
-                animate={{ width: sidebarOpen ? 420 : 0, opacity: sidebarOpen ? 1 : 0 }}
-                className="flex flex-col border-r border-slate-200/60 bg-white/70 backdrop-blur-3xl relative z-20 shadow-2xl"
+                animate={{
+                    width: sidebarOpen ? (isMobile ? "85%" : 420) : 0,
+                    x: isMobile && !sidebarOpen ? -100 : 0,
+                    opacity: sidebarOpen ? 1 : 0
+                }}
+                className={cn(
+                    "flex flex-col border-r border-slate-200/60 bg-white/70 backdrop-blur-3xl shadow-2xl transition-all duration-300 ease-in-out overflow-hidden",
+                    isMobile ? "fixed inset-y-0 left-0 z-40 h-full" : "relative z-20",
+                    !sidebarOpen && "pointer-events-none"
+                )}
             >
                 <div className="p-6 border-b border-slate-100 flex items-center justify-between bg-white/50">
-                    <div onClick={()=>router.push("/")} className="flex items-center gap-3 cursor-pointer">
+                    <div className="flex items-center gap-3 cursor-pointer">
                         <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-indigo-200">
                             <MessageSquare className="w-5 h-5" />
                         </div>
@@ -252,47 +289,51 @@ export default function Agent() {
                 {!sidebarOpen && (
                     <button
                         onClick={() => setSidebarOpen(true)}
-                        className="absolute left-6 top-5 z-30 p-3 bg-white border border-slate-200 rounded-2xl shadow-2xl hover:bg-slate-50 transition-all hover:-translate-y-1 active:scale-95 text-indigo-600"
+                        className="absolute left-6 top-5 z-30 p-3 bg-white border border-slate-200 rounded-2xl shadow-2xl hover:bg-slate-50 transition-all hover:-translate-y-1 active:scale-95 text-indigo-600 md:ml-0 -ml-4"
                     >
                         <ChevronRight className="w-5 h-5" />
                     </button>
                 )}
 
                 {/* tools sect */}
-                <header className="h-20 border-b border-slate-200/60 bg-white/70 backdrop-blur-2xl flex items-center justify-between px-10 shrink-0 relative z-10">
+                <header className="h-20 border-b border-slate-200/60 bg-white/70 backdrop-blur-2xl flex items-center justify-between px-4 md:px-10 shrink-0 relative z-10">
                     <div className="flex items-center gap-6">
                         <div
-                            className={`flex bg-slate-100/50 p-1.5 rounded-2xl border border-slate-200/60 ${sidebarOpen ? "ml-0" : "ml-14"}`}
+                            className={`flex bg-slate-100/50 p-1.5 rounded-2xl border border-slate-200/60 ${sidebarOpen && !isMobile ? "ml-0" : "ml-12 md:ml-14"}`}
                         >
                             <button
                                 onClick={() => setActiveTab("preview")}
                                 className={cn(
-                                    "flex items-center gap-2.5 px-6 py-2 text-xs font-black uppercase tracking-widest rounded-xl transition-all",
+                                    "flex items-center justify-center w-10 h-10 rounded-xl transition-all relative group",
                                     activeTab === "preview"
                                         ? "bg-white text-indigo-600 shadow-xl human-shadow"
-                                        : "text-slate-400 hover:text-slate-600",
+                                        : "text-slate-400 hover:text-slate-600 hover:bg-white/50",
                                 )}
                             >
                                 <Play className="w-4 h-4 fill-current" />
-                                Preview
+                                <div className="absolute top-12 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] py-2 px-3 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-50 shadow-2xl font-black uppercase tracking-widest border border-white/10 transition-all scale-95 group-hover:scale-100">
+                                    PREVIEW
+                                </div>
                             </button>
                             <button
                                 onClick={() => setActiveTab("code")}
                                 className={cn(
-                                    "flex items-center gap-2.5 px-6 py-2 text-xs font-black uppercase tracking-widest rounded-xl transition-all",
+                                    "flex items-center justify-center w-10 h-10 rounded-xl transition-all relative group",
                                     activeTab === "code"
                                         ? "bg-white text-indigo-600 shadow-xl human-shadow"
-                                        : "text-slate-400 hover:text-slate-600",
+                                        : "text-slate-400 hover:text-slate-600 hover:bg-white/50",
                                 )}
                             >
                                 <Code2 className="w-4 h-4" />
-                                Source
+                                <div className="absolute top-12 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] py-2 px-3 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-50 shadow-2xl font-black uppercase tracking-widest border border-white/10 transition-all scale-95 group-hover:scale-100">
+                                    SOURCE
+                                </div>
                             </button>
                         </div>
 
-                        <div className="h-6 w-px bg-slate-200" />
+                        <div className="h-6 w-px bg-slate-200 hidden md:block" />
 
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 hidden md:flex">
                             {history.length > 0 && (
                                 <History className="w-4 h-4 text-slate-300 mr-2" />
                             )}
@@ -315,34 +356,40 @@ export default function Agent() {
                         </div>
                     </div>
 
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center md:gap-4 gap-2">
                         <Button
                             variant="outline"
                             size="md"
-                            className="gap-2 rounded-2xl border-slate-200"
+                            className="rounded-2xl border-slate-200 p-0 w-10 h-10 group relative"
                             onClick={() => editorRef.current?.getAction("editor.action.formatDocument")?.run()}
                         >
                             <Zap className="w-4 h-4" />
-                            Format
+                            <div className="absolute top-12 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] py-2 px-3 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-50 shadow-2xl font-black uppercase tracking-widest border border-white/10 transition-all scale-95 group-hover:scale-100">
+                                FORMAT
+                            </div>
                         </Button>
                         <Button
                             variant="outline"
                             size="md"
-                            className="gap-2 rounded-2xl border-slate-200"
+                            className="rounded-2xl border-slate-200 p-0 w-10 h-10 group relative"
                             onClick={() => setCode(INITIAL_CODE)}
                         >
                             <RotateCcw className="w-4 h-4" />
-                            Start Fresh
+                            <div className="absolute top-12 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] py-2 px-3 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-50 shadow-2xl font-black uppercase tracking-widest border border-white/10 transition-all scale-95 group-hover:scale-100">
+                                RESET
+                            </div>
                         </Button>
-                        <Button variant="primary" size="md" className="gap-2 rounded-2xl shadow-xl shadow-indigo-100">
+                        <Button variant="primary" size="md" className="rounded-2xl shadow-xl shadow-indigo-100 p-0 w-10 h-10 group relative">
                             <CheckCircle2 className="w-4 h-4" />
-                            Share with the World
+                            <div className="absolute top-12 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] py-2 px-3 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-50 shadow-2xl font-black uppercase tracking-widest border border-white/10 transition-all scale-95 group-hover:scale-100">
+                                SHARE
+                            </div>
                         </Button>
                     </div>
                 </header>
 
                 {/* tabs implemantation */}
-                <div className="flex-1 overflow-hidden relative p-8">
+                <div className="flex-1 overflow-hidden relative p-4 md:p-8">
                     {activeTab === "preview" ? (
                         <div className="w-full h-full overflow-auto flex flex-col items-center animate-soft-in">
                             {previewCode ? (
@@ -360,8 +407,8 @@ export default function Agent() {
                                     }}
                                     noInline
                                 >
-                                    <div className="w-full max-w-[1400px] bg-white rounded-[3rem] shadow-3xl human-shadow border border-white/40 overflow-hidden min-h-[800px] transition-all duration-700 hover:shadow-indigo-200/50">
-                                        <LivePreview className="w-full h-full" />
+                                    <div className="w-full max-w-[1400px] bg-white rounded-[3rem] shadow-3xl human-shadow border border-white/40 overflow-hidden transition-all duration-700 hover:shadow-indigo-200/50">
+                                        <LivePreview className="w-full h-full overflow-auto" />
                                     </div>
                                     <LiveError className="mt-8 p-8 bg-rose-50 text-rose-700 rounded-3xl text-sm font-mono border-2 border-rose-100 w-full max-w-[1400px] shadow-2xl animate-shake" />
                                 </LiveProvider>
@@ -419,7 +466,7 @@ export default function Agent() {
                                         editor.getAction("editor.action.formatDocument")?.run();
                                         editor.focus();
                                     }, 500);
-                                    
+
                                     editor.addCommand(monaco.KeyMod.Shift | monaco.KeyMod.Alt | monaco.KeyCode.KeyF, () => {
                                         editor.getAction("editor.action.formatDocument")?.run();
                                     });
