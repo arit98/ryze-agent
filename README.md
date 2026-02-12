@@ -20,7 +20,7 @@ An AI-powered agent that converts natural language UI intent into working UI cod
    ```bash
    npm run dev
    ```
-4. Open [lumina.ai](http://localhost:3000) in your browser for live preview.
+4. Open [lumina.ai](https://ryze-agent.vercel.app) in your browser for live preview.
 
 ---
 
