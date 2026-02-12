@@ -1,8 +1,8 @@
 # Ryze AI: Deterministic UI Generator
 
-An AI-powered agent that converts natural language UI intent into working UI code with a live preview, using a fixed, deterministic component library. Inspired by Claude Code but for UI development.
+An AI-powered agent that converts natural language UI intent into working UI code with a live preview, using a fixed, deterministic component library. Inspired by Claude Code but for UI development only.
 
-## 🚀 Getting Started
+## 🚀 Get Started
 
 ### Prerequisites
 
@@ -20,7 +20,7 @@ An AI-powered agent that converts natural language UI intent into working UI cod
    ```bash
    npm run dev
    ```
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+4. Open [lumina.ai](http://localhost:3000) in your browser for live preview.
 
 ---
 

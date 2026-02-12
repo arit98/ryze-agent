@@ -6,11 +6,9 @@ import { z } from "zod";
 const askedQuestions = new Map<string, any>();
 
 let lastCallTime = 0;
-const MIN_INTERVAL_MS = 2000; // Slightly reduced interval
+const MIN_INTERVAL_MS = 2000;
 
-/* ------------------------------------------------------------------ */
-/* Schemas                                                            */
-/* ------------------------------------------------------------------ */
+// schema
 const RequestSchema = z.object({
     prompt: z.string(),
     currentCode: z.string().optional().default(""),
@@ -26,9 +24,7 @@ const ResponseSchema = z.object({
     explanation: z.string().describe("A brief, user-friendly summary of the changes for the chat display"),
 });
 
-/* ------------------------------------------------------------------ */
-/* System Prompt                                                      */
-/* ------------------------------------------------------------------ */
+// created ui prompt
 const COMPONENT_LIBRARY_PROMPT = `
 You are an expert UI Architect specializing in clean, maintainable code following SOLID principles.
 You use a fixed component library to build modern web interfaces.
@@ -57,7 +53,7 @@ IMPLEMENTATION RULES:
 
 export async function POST(req: NextRequest) {
     try {
-        // Rate-limit guard
+        // rate limitation
         const now = Date.now();
         if (now - lastCallTime < MIN_INTERVAL_MS) {
             return NextResponse.json({
@@ -67,7 +63,7 @@ export async function POST(req: NextRequest) {
         }
         lastCallTime = now;
 
-        // Parse & Validate Request
+        // getting req
         const body = await req.json();
         const parseResult = RequestSchema.safeParse(body);
 
@@ -77,16 +73,15 @@ export async function POST(req: NextRequest) {
 
         const { prompt, currentCode, history } = parseResult.data;
 
-        // Check cache
         if (askedQuestions.has(prompt)) {
             return NextResponse.json(askedQuestions.get(prompt));
         }
 
         const safeHistory = history.slice(-4);
 
-        // Generate Structured Object
+        // define model
         const { object } = await generateObject({
-            model: google("gemini-2.5-flash"), // Using 2.5-flash as 2.0-flash has no free tier quota
+            model: google("gemini-2.5-flash"), 
             schema: ResponseSchema,
             temperature: 0,
             prompt: `
@@ -135,7 +130,7 @@ export async function POST(req: NextRequest) {
             }, { status: 200 });
         }
 
-        // Handle model not found or other API issues
+        // handle model if getting error
         if (error?.message?.toLowerCase().includes("not found") || error?.message?.toLowerCase().includes("supported")) {
             return NextResponse.json({
                 error: "Model Error",

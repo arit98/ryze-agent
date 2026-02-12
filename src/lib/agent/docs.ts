@@ -1,4 +1,4 @@
-import * as React from 'react';
+export const UILIBRARY = `import * as React from 'react';
 import { cn } from '@/lib/utils';
 
 // Button Component
@@ -165,7 +165,7 @@ export const Modal = ({ isOpen, onClose, title, children }: { isOpen: boolean; o
     );
 };
 
-// Chart Component (Mocked)
+// Chart Component
 export const Chart = ({ data, title }: { data: { label: string; value: number }[]; title?: string }) => {
     const max = Math.max(...data.map(d => d.value));
     return (
@@ -176,7 +176,7 @@ export const Chart = ({ data, title }: { data: { label: string; value: number }[
                     <div key={i} className="flex-1 flex flex-col items-center gap-3 group">
                         <div
                             className="w-full bg-indigo-100/50 rounded-2xl transition-all duration-500 group-hover:bg-indigo-500 relative human-shadow group-hover:scale-105"
-                            style={{ height: `${(item.value / max) * 100}%` }}
+                            style={{ height: \`\${(item.value / max) * 100}%\` }}
                         >
                             <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] py-1.5 px-2.5 rounded-lg opacity-0 group-hover:opacity-100 transition-all pointer-events-none font-bold">
                                 {item.value}
@@ -189,4 +189,4 @@ export const Chart = ({ data, title }: { data: { label: string; value: number }[
         </Card>
     );
 };
-
+`;

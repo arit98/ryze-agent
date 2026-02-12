@@ -13,39 +13,14 @@ import {
     ArrowRight,
 } from "lucide-react";
 import { useRouter } from 'next/navigation';
+import NavBar from "@/components/NavBar";
 
 export default function WelcomePage() {
     const router = useRouter()
     return (
         <div className="min-h-screen bg-slate-50 font-sans selection:bg-indigo-100">
             {/* Navigation */}
-            <UILibrary.Navbar
-                logo={
-                    <div className="font-bold text-2xl tracking-tight text-indigo-600 flex items-center gap-3">
-                        <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-indigo-200">
-                            <Sparkles className="w-6 h-6" />
-                        </div>
-                        <span className="tracking-tighter">
-                            Lumina<span className="text-slate-900 font-extrabold text-3xl">.AI</span>
-                        </span>
-                    </div>
-                }
-                actions={
-                    <div className="flex items-center gap-6">
-                        <button className="text-sm font-bold text-slate-500 hover:text-indigo-600 transition-colors uppercase tracking-widest">
-                            Our Story
-                        </button>
-                        <UILibrary.Button
-                            variant="primary"
-                            className="rounded-2xl px-8 shadow-xl shadow-indigo-100 hover:scale-105 transition-transform"
-                            onClick={() => router.push("/pages/agent")}
-                        >
-                            Start Creating
-                        </UILibrary.Button>
-                    </div>
-                }
-            />
-
+            <NavBar />
             <main className="max-w-7xl mx-auto px-8 pt-24 pb-40">
                 {/* Hero Section */}
                 <div className="flex flex-col items-center text-center space-y-10 mb-40 animate-soft-in">
@@ -67,7 +42,7 @@ export default function WelcomePage() {
                         <UILibrary.Button
                             variant="primary"
                             size="lg"
-                            className="px-12 py-8 text-xl rounded-3xl shadow-2xl shadow-indigo-200 flex items-center gap-3 hover:scale-105 active:scale-95 transition-all group"
+                            className="px-12 py-8 text-xl rounded-3xl shadow-2xl shadow-indigo-200 flex items-center gap-3 hover:scale-105 active:scale-95 transition-all group cursor-pointer"
                             onClick={() => router.push("/pages/agent")}
                         >
                             Start Your Journey <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
@@ -75,9 +50,10 @@ export default function WelcomePage() {
                         <UILibrary.Button
                             variant="outline"
                             size="lg"
-                            className="px-12 py-8 text-xl rounded-3xl bg-white/50 backdrop-blur-sm flex items-center gap-2 hover:bg-white transition-all shadow-xl human-shadow"
+                            className="px-12 py-8 text-xl rounded-3xl bg-white/50 backdrop-blur-sm flex items-center gap-2 hover:bg-white transition-all shadow-xl human-shadow cursor-pointer"
+                            onClick={()=>router.push("/pages/docs")}
                         >
-                            Watch the Story
+                            Documentation
                         </UILibrary.Button>
                     </div>
                 </div>

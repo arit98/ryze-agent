@@ -27,7 +27,8 @@ import { cn } from "@/lib/utils";
 import { ChatMessage, UIVersion, AgentResponse } from "@/lib/agent/types";
 import { motion, AnimatePresence } from "framer-motion";
 import * as Lucide from "lucide-react";
-import { INITIAL_CODE } from "@/lib/agent/ui"
+import { INITIAL_CODE } from "@/lib/agent/initcode"
+import { useRouter } from "next/navigation";
 
 // Helper function to remove import statements for react-live
 const stripImports = (code: string) => {
@@ -54,6 +55,8 @@ export default function App() {
     const [activeTab, setActiveTab] = useState<"preview" | "code">("preview");
     const [mounted, setMounted] = useState(false);
     const editorRef = useRef<any>(null);
+
+    const router = useRouter()
 
     useEffect(() => {
         setMounted(true);
@@ -154,7 +157,7 @@ export default function App() {
                 className="flex flex-col border-r border-slate-200/60 bg-white/70 backdrop-blur-3xl relative z-20 shadow-2xl"
             >
                 <div className="p-6 border-b border-slate-100 flex items-center justify-between bg-white/50">
-                    <div className="flex items-center gap-3">
+                    <div onClick={()=>router.push("/")} className="flex items-center gap-3 cursor-pointer">
                         <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-indigo-200">
                             <MessageSquare className="w-5 h-5" />
                         </div>
@@ -317,6 +320,15 @@ export default function App() {
                             variant="outline"
                             size="md"
                             className="gap-2 rounded-2xl border-slate-200"
+                            onClick={() => editorRef.current?.getAction("editor.action.formatDocument")?.run()}
+                        >
+                            <Zap className="w-4 h-4" />
+                            Format
+                        </Button>
+                        <Button
+                            variant="outline"
+                            size="md"
+                            className="gap-2 rounded-2xl border-slate-200"
                             onClick={() => setCode(INITIAL_CODE)}
                         >
                             <RotateCcw className="w-4 h-4" />
@@ -384,6 +396,7 @@ export default function App() {
                                     smoothScrolling: true,
                                 }}
                                 onMount={(editor, monaco) => {
+                                    editorRef.current = editor;
                                     monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
                                         target: monaco.languages.typescript.ScriptTarget.Latest,
                                         allowNonTsExtensions: true,
@@ -400,10 +413,17 @@ export default function App() {
                                         noSyntaxValidation: true,
                                         noSuggestionDiagnostics: true,
                                     });
+
+                                    // Initial format after content is loaded
                                     setTimeout(() => {
                                         editor.getAction("editor.action.formatDocument")?.run();
                                         editor.focus();
-                                    }, 200);
+                                    }, 500);
+
+                                    // Add a command for Shift+Alt+F (standard VS Code formatting shortcut)
+                                    editor.addCommand(monaco.KeyMod.Shift | monaco.KeyMod.Alt | monaco.KeyCode.KeyF, () => {
+                                        editor.getAction("editor.action.formatDocument")?.run();
+                                    });
                                 }}
                             />
                         </div>

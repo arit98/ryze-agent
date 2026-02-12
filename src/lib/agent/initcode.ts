@@ -1,5 +1,4 @@
-export const INITIAL_CODE = `
-import React from 'react';
+export const INITIAL_CODE = `import React from 'react';
 import * as UILibrary from '@/components/ui-library';
 import { Sparkles, Heart, Smile, Users, ChevronRight, Globe, Cpu, ArrowRight } from 'lucide-react';
 
