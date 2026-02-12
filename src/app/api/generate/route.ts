@@ -8,7 +8,7 @@ const askedQuestions = new Map<string, any>();
 let lastCallTime = 0;
 const MIN_INTERVAL_MS = 2000;
 
-// schema
+// schema area
 const RequestSchema = z.object({
     prompt: z.string(),
     currentCode: z.string().optional().default(""),
@@ -132,6 +132,7 @@ export async function POST(req: NextRequest) {
 
         // handle model if getting error
         if (error?.message?.toLowerCase().includes("not found") || error?.message?.toLowerCase().includes("supported")) {
+            // console.log(error?.message);
             return NextResponse.json({
                 error: "Model Error",
                 explanation: "The selected Gemini model is not available. Please check your API key and model permissions."

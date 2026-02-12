@@ -19,10 +19,10 @@ export default function WelcomePage() {
     const router = useRouter()
     return (
         <div className="min-h-screen bg-slate-50 font-sans selection:bg-indigo-100">
-            {/* Navigation */}
+            {/* nabvar */}
             <NavBar />
             <main className="max-w-7xl mx-auto px-8 pt-24 pb-40">
-                {/* Hero Section */}
+                {/* hero sect */}
                 <div className="flex flex-col items-center text-center space-y-10 mb-40 animate-soft-in">
                     <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-rose-50 text-rose-600 text-xs font-bold border border-rose-100 uppercase tracking-widest animate-pulse">
                         <Heart className="w-3.5 h-3.5 fill-rose-600" />
@@ -58,7 +58,7 @@ export default function WelcomePage() {
                     </div>
                 </div>
 
-                {/* Feature Highlights */}
+                {/* row sect */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-40">
                     <FeatureCard
                         icon={<Smile className="w-8 h-8" />}
@@ -80,7 +80,7 @@ export default function WelcomePage() {
                     />
                 </div>
 
-                {/* Action Showcase */}
+                {/* review sect */}
                 <UILibrary.Card className="border-none shadow-3xl rounded-[3rem] overflow-hidden bg-white min-h-0 animate-soft-in">
                     <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[500px]">
                         <div className="p-20 space-y-10 bg-linear-to-br from-indigo-950 via-slate-900 to-indigo-900 text-white flex flex-col justify-center min-w-0">
@@ -149,7 +149,6 @@ export default function WelcomePage() {
     );
 };
 
-// Helper Sub-component
 // @ts-ignore
 const FeatureCard = ({ icon, title, description, color }) => (
     <UILibrary.Card className="border-none shadow-2xl bg-white/80 hover:-translate-y-3 transition-all duration-500 rounded-[2.5rem] group hover:bg-white hover:shadow-indigo-100">

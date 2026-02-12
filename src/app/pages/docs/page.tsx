@@ -19,18 +19,18 @@ import { useRouter } from 'next/navigation';
 import { UILIBRARY } from '@/lib/agent/docs';
 import { UTILCODE } from '@/lib/agent/util';
 
+const sections = [
+    { id: 'introduction', label: 'Introduction', icon: Book },
+    { id: 'getting-started', label: 'Getting Started', icon: Zap },
+    { id: 'components', label: 'Components', icon: Layout },
+    { id: 'theming', label: 'Theming', icon: Palette },
+    { id: 'typography', label: 'Typography', icon: Type },
+];
+
 export default function DocsPage() {
     const router = useRouter();
     const [activeSection, setActiveSection] = useState('introduction');
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-    const sections = [
-        { id: 'introduction', label: 'Introduction', icon: Book },
-        { id: 'getting-started', label: 'Getting Started', icon: Zap },
-        { id: 'components', label: 'Components', icon: Layout },
-        { id: 'theming', label: 'Theming', icon: Palette },
-        { id: 'typography', label: 'Typography', icon: Type },
-    ];
 
     const renderContent = () => {
         switch (activeSection) {
@@ -132,7 +132,7 @@ export default function DocsPage() {
                             </p>
                         </div>
 
-                        {/* Buttons */}
+                        {/* btn sect */}
                         <section className="space-y-6">
                             <div className="flex items-center gap-3 mb-6">
                                 <div className="h-px bg-slate-200 flex-1" />
@@ -160,7 +160,7 @@ export default function DocsPage() {
                             </UILibrary.Card>
                         </section>
 
-                        {/* Cards */}
+                        {/* card sect */}
                         <section className="space-y-6">
                             <div className="flex items-center gap-3 mb-6">
                                 <div className="h-px bg-slate-200 flex-1" />
@@ -183,7 +183,7 @@ export default function DocsPage() {
                             </div>
                         </section>
 
-                        {/* Inputs */}
+                        {/* input sect */}
                         <section className="space-y-6">
                             <div className="flex items-center gap-3 mb-6">
                                 <div className="h-px bg-slate-200 flex-1" />
@@ -270,7 +270,7 @@ export default function DocsPage() {
 
     return (
         <div className="min-h-screen bg-slate-50 font-sans selection:bg-indigo-100 flex">
-            {/* Mobile Sidebar Overlay */}
+            {/* mob menu */}
             {isMobileMenuOpen && (
                 <div
                     className="fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-40 lg:hidden"
@@ -278,23 +278,23 @@ export default function DocsPage() {
                 />
             )}
 
-            {/* Sidebar */}
+            {/* side drawer */}
             <aside className={`
                 fixed lg:sticky top-0 left-0 h-screen w-72 bg-white/80 backdrop-blur-2xl border-r border-slate-200/60 z-50 transition-transform duration-300 ease-in-out
                 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
             `}>
                 <div className="flex flex-col h-full">
-                    {/* Sidebar Header */}
+                    {/* header sect */}
                     <div className="h-20 flex items-center px-8 border-b border-slate-100/50">
                         <div onClick={() => router.push('/')} className="flex items-center gap-3 cursor-pointer group">
                             <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white shadow-lg shadow-indigo-200 group-hover:scale-110 transition-transform">
                                 <Book className="w-4 h-4" />
                             </div>
-                            <span className="font-bold text-lg text-slate-900 tracking-tight">Lumina<span className="text-slate-400 font-medium">Docs</span></span>
+                            <span className="font-bold text-lg text-indigo-600 tracking-tight">Lumina<span className="text-slate-400 font-medium">Docs</span></span>
                         </div>
                     </div>
 
-                    {/* Navigation */}
+                    {/* navbar */}
                     <nav className="flex-1 overflow-y-auto py-8 px-4 space-y-1">
                         {sections.map((section) => (
                             <button
@@ -321,7 +321,7 @@ export default function DocsPage() {
                         ))}
                     </nav>
 
-                    {/* Sidebar Footer */}
+                    {/* bottom part */}
                     <div className="p-6 border-t border-slate-100/50">
                         <UILibrary.Button
                             variant="primary"
@@ -334,9 +334,9 @@ export default function DocsPage() {
                 </div>
             </aside>
 
-            {/* Main Content */}
+            {/* main content */}
             <main className="flex-1 min-w-0">
-                {/* Mobile Header */}
+                {/* mob header */}
                 <div className="lg:hidden h-20 flex items-center justify-between px-6 border-b border-slate-200 bg-white/80 backdrop-blur-xl sticky top-0 z-30">
                     <span className="font-bold text-slate-900">Documentation</span>
                     <button

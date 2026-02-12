@@ -30,17 +30,17 @@ import * as Lucide from "lucide-react";
 import { INITIAL_CODE } from "@/lib/agent/initcode"
 import { useRouter } from "next/navigation";
 
-// Helper function to remove import statements for react-live
+// remove import 
 const stripImports = (code: string) => {
     return code
-        .replace(/```(?:tsx|jsx|js|ts)?\n?([\s\S]*?)```/g, '$1') // Remove code fences
+        .replace(/```(?:tsx|jsx|js|ts)?\n?([\s\S]*?)```/g, '$1')
         .split("\n")
         .filter((line) => !line.trim().startsWith("import "))
         .join("\n")
         .trim();
 };
 
-export default function App() {
+export default function Agent() {
     const [messages, setMessages] = useState<ChatMessage[]>([
         {
             role: "assistant",
@@ -65,7 +65,7 @@ export default function App() {
     const [sidebarOpen, setSidebarOpen] = useState(true);
     const chatEndRef = useRef<HTMLDivElement>(null);
 
-    // Strip imports for react-live preview
+    // foe preview
     const previewCode = stripImports(code);
 
     useEffect(() => {
@@ -91,7 +91,7 @@ export default function App() {
                 body: JSON.stringify({
                     prompt: input,
                     currentCode: code,
-                    history: history.slice(-5), // Send some context
+                    history: history.slice(-5),
                 }),
             });
 
@@ -150,7 +150,7 @@ export default function App() {
 
     return (
         <div className="flex h-screen bg-slate-50 overflow-hidden font-sans text-slate-900">
-            {/* Left Sidebar: Chat */}
+            {/* chat sect */}
             <motion.div
                 initial={false}
                 animate={{ width: sidebarOpen ? 420 : 0, opacity: sidebarOpen ? 1 : 0 }}
@@ -247,7 +247,7 @@ export default function App() {
                 </div>
             </motion.div>
 
-            {/* Main Content */}
+            {/* main content */}
             <div className="flex-1 flex flex-col relative min-w-0 bg-slate-100/30">
                 {!sidebarOpen && (
                     <button
@@ -258,7 +258,7 @@ export default function App() {
                     </button>
                 )}
 
-                {/* Toolbar */}
+                {/* tools sect */}
                 <header className="h-20 border-b border-slate-200/60 bg-white/70 backdrop-blur-2xl flex items-center justify-between px-10 shrink-0 relative z-10">
                     <div className="flex items-center gap-6">
                         <div
@@ -341,7 +341,7 @@ export default function App() {
                     </div>
                 </header>
 
-                {/* Editor / Preview Area */}
+                {/* tabs implemantation */}
                 <div className="flex-1 overflow-hidden relative p-8">
                     {activeTab === "preview" ? (
                         <div className="w-full h-full overflow-auto flex flex-col items-center animate-soft-in">
@@ -414,13 +414,12 @@ export default function App() {
                                         noSuggestionDiagnostics: true,
                                     });
 
-                                    // Initial format after content is loaded
+                                    // manual formatting code
                                     setTimeout(() => {
                                         editor.getAction("editor.action.formatDocument")?.run();
                                         editor.focus();
                                     }, 500);
-
-                                    // Add a command for Shift+Alt+F (standard VS Code formatting shortcut)
+                                    
                                     editor.addCommand(monaco.KeyMod.Shift | monaco.KeyMod.Alt | monaco.KeyCode.KeyF, () => {
                                         editor.getAction("editor.action.formatDocument")?.run();
                                     });

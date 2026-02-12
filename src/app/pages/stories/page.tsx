@@ -21,26 +21,28 @@ export default function OurStoryPage() {
 
     return (
         <main className="min-h-screen bg-slate-50 font-sans selection:bg-indigo-100">
-            {/* Navigation */}
+            {/* navbar */}
             <nav className="h-20 border-b border-slate-100/50 bg-white/70 backdrop-blur-xl sticky top-0 z-50 px-8 flex items-center justify-between">
                 <div onClick={() => router.push('/')} className="flex items-center gap-3 cursor-pointer group">
                     <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-indigo-200 group-hover:scale-110 transition-transform">
                         <Sparkles className="w-5 h-5" />
                     </div>
-                    <span className="font-black text-xl tracking-tight text-slate-900 leading-tight">Lumina</span>
+                    <span className="text-indigo-600 text-xl font-bold">
+                        Lumina<span className="text-slate-900 font-extrabold text-2xl">.AI</span>
+                    </span>
                 </div>
                 <UILibrary.Button
                     variant="outline"
                     size="sm"
                     onClick={() => router.push('/')}
-                    className="rounded-xl flex items-center gap-2"
+                    className="rounded-xl flex items-center gap-2 cursor-pointer"
                 >
                     <ArrowLeft className="w-4 h-4" /> Back to Home
                 </UILibrary.Button>
             </nav>
 
             <div className="max-w-6xl mx-auto px-8 py-24">
-                {/* Hero Section */}
+                {/* hero sect */}
                 <header className="text-center mb-32 animate-soft-in">
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50 text-indigo-600 text-[10px] font-black uppercase tracking-widest border border-indigo-100 mb-8">
                         <Heart className="w-3 h-3 fill-indigo-600" />
@@ -55,7 +57,7 @@ export default function OurStoryPage() {
                 </header>
 
                 <div className="space-y-32">
-                    {/* Section 1: The Spark */}
+                    {/* sect 1 */}
                     <section className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center animate-soft-in">
                         <div className="space-y-8">
                             <div className="w-16 h-16 bg-rose-50 rounded-2xl flex items-center justify-center text-rose-600 shadow-xl shadow-rose-100">
@@ -76,7 +78,7 @@ export default function OurStoryPage() {
                         </div>
                     </section>
 
-                    {/* Section 2: Moving Together */}
+                    {/* sect 2 */}
                     <section className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center animate-soft-in">
                         <div className="order-2 lg:order-1 relative group">
                             <div className="absolute -inset-4 bg-linear-to-bl from-purple-500 to-cyan-500 rounded-[3rem] opacity-20 blur-2xl group-hover:opacity-30 transition-opacity" />
@@ -97,7 +99,7 @@ export default function OurStoryPage() {
                         </div>
                     </section>
 
-                    {/* Mission Quote */}
+                    {/* sect 3 */}
                     <section className="text-center py-20 animate-soft-in">
                         <div className="max-w-4xl mx-auto space-y-12">
                             <div className="flex justify-center">
@@ -114,7 +116,7 @@ export default function OurStoryPage() {
                         </div>
                     </section>
 
-                    {/* LuminoJS Section */}
+                    {/* sect 5 */}
                     <section className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center animate-soft-in">
                         <div className="relative group">
                             <div className="absolute -inset-4 bg-linear-to-tr from-amber-500 to-orange-500 rounded-[3rem] opacity-20 blur-2xl group-hover:opacity-30 transition-opacity" />
@@ -137,7 +139,7 @@ export default function OurStoryPage() {
                         </div>
                     </section>
 
-                    {/* The Future */}
+                    {/* sect 6 */}
                     <section className="animate-soft-in">
                         <UILibrary.Card className="bg-indigo-950 p-12 md:p-24 text-white border-none shadow-3xl rounded-[4rem] relative overflow-hidden">
                             <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500/20 rounded-full blur-[100px] -mr-48 -mt-48" />
@@ -155,7 +157,7 @@ export default function OurStoryPage() {
                                 <div className="pt-8">
                                     <UILibrary.Button
                                         variant="primary"
-                                        className="bg-white text-indigo-950 hover:bg-indigo-50 px-10 py-6 rounded-2xl text-lg font-bold shadow-none"
+                                        className="bg-white text-indigo-950 hover:bg-indigo-50 px-10 py-6 rounded-2xl text-lg font-bold shadow-none cursor-pointer"
                                         onClick={() => router.push('/pages/agent')}
                                     >
                                         Start Creating with Us
@@ -166,7 +168,6 @@ export default function OurStoryPage() {
                     </section>
                 </div>
 
-                {/* Footer */}
                 <footer className="mt-40 text-center border-t border-slate-200 pt-20">
                     <p className="text-slate-400 text-sm font-bold uppercase tracking-widest">
                         © {new Date().getFullYear()} Lumina Intelligence Inc.
