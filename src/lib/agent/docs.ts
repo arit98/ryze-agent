@@ -1,7 +1,7 @@
-export const UILIBRARY = `import * as React from 'react';
+export const UILIBRARY = `
+import * as React from 'react';
 import { cn } from '@/lib/utils';
 
-// Button Component
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
     size?: 'sm' | 'md' | 'lg';
@@ -38,7 +38,6 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 );
 Button.displayName = 'Button';
 
-// Card Component
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
     children: React.ReactNode;
 }
@@ -64,7 +63,6 @@ export const CardFooter = ({ className, children }: { className?: string; childr
     <div className={cn('px-8 py-6 bg-slate-50/50 border-t border-slate-100/50', className)}>{children}</div>
 );
 
-// Input Component
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     label?: string;
     error?: string;
@@ -89,7 +87,6 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
 );
 Input.displayName = 'Input';
 
-// Table Component
 export const Table = ({ children, className }: { children: React.ReactNode; className?: string }) => (
     <div className="w-full overflow-auto rounded-3xl border border-slate-200/60 bg-white/50 backdrop-blur-sm">
         <table className={cn('w-full text-sm text-left', className)}>{children}</table>
@@ -115,7 +112,6 @@ export const TableCell = ({ children, className, isHeader }: { children: React.R
     return <Tag className={cn('px-8 py-5 font-medium whitespace-nowrap', className)}>{children}</Tag>;
 };
 
-// Navbar Component
 export const Navbar = ({ logo, actions }: { logo: React.ReactNode; actions?: React.ReactNode }) => (
     <nav className="h-20 border-b border-slate-100/50 bg-white/70 backdrop-blur-xl sticky top-0 z-50 px-8 flex items-center justify-between">
         <div className="flex items-center gap-6">{logo}</div>
@@ -123,7 +119,6 @@ export const Navbar = ({ logo, actions }: { logo: React.ReactNode; actions?: Rea
     </nav>
 );
 
-// Sidebar Component
 export const Sidebar = ({ children, className }: { children: React.ReactNode; className?: string }) => (
     <aside className={cn('w-72 border-r border-slate-100 bg-white/50 backdrop-blur-xl h-full flex flex-col', className)}>
         {children}
@@ -146,7 +141,6 @@ export const SidebarItem = ({ icon: Icon, label, active, onClick }: { icon: any;
     </button>
 );
 
-// Modal Component
 export const Modal = ({ isOpen, onClose, title, children }: { isOpen: boolean; onClose: () => void; title: string; children: React.ReactNode }) => {
     if (!isOpen) return null;
     return (
@@ -165,7 +159,6 @@ export const Modal = ({ isOpen, onClose, title, children }: { isOpen: boolean; o
     );
 };
 
-// Chart Component
 export const Chart = ({ data, title }: { data: { label: string; value: number }[]; title?: string }) => {
     const max = Math.max(...data.map(d => d.value));
     return (
@@ -176,7 +169,7 @@ export const Chart = ({ data, title }: { data: { label: string; value: number }[
                     <div key={i} className="flex-1 flex flex-col items-center gap-3 group">
                         <div
                             className="w-full bg-indigo-100/50 rounded-2xl transition-all duration-500 group-hover:bg-indigo-500 relative human-shadow group-hover:scale-105"
-                            style={{ height: \`\${(item.value / max) * 100}%\` }}
+                            style={{ height: `${(item.value / max) * 100}%` }}
                         >
                             <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] py-1.5 px-2.5 rounded-lg opacity-0 group-hover:opacity-100 transition-all pointer-events-none font-bold">
                                 {item.value}
