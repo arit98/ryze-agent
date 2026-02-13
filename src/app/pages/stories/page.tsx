@@ -131,7 +131,7 @@ export default function OurStoryPage() {
                             </div>
                             <h2 className="text-4xl font-black text-slate-900 tracking-tight">LuminoJS: The Quantum Leap</h2>
                             <p className="text-xl text-slate-500 leading-relaxed font-medium">
-                                We aren't just building apps; we're rebuilding the foundation. <span className="text-indigo-600 font-bold">LuminoJS</span> is our vision for a web without limits.
+                                We aren't just building apps; we're rebuilding the foundation. <a target="_blank" rel="noopener noreferrer" href='https://github.com/arit98/project-lumino' className="text-indigo-600 font-bold cursor-pointer hover:underline">LuminoJS</a> is our vision for a web without limits.
                             </p>
                             <p className="text-lg text-slate-500 leading-relaxed font-medium">
                                 Envisioned as the definitive competitor to React, LuminoJS strips away the virtual DOM to deliver bare-metal performance with an API so intuitive it feels like magic. It is the engine designed to power the impossible.
